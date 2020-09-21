@@ -3,6 +3,7 @@ require("./models/Track");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const config = require("config");
 const authRoutes = require("./routes/authRoutes");
 const trackRoutes = require("./routes/trackRoutes");
 const requireAuth = require("./middlewares/requireAuth");
@@ -13,9 +14,8 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri =
-  "mongodb+srv://appadmin:Appadm%21n3@mobile-app-services.zkvia.mongodb.net/test?retryWrites=true&w=majority";
 const PORT = 8080;
+const mongoUri = config.get("mongo.uri");
 
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
